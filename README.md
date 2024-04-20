@@ -1,11 +1,11 @@
-direct tree
-|- main.dart
-|- enums => 放enum
-|- configs => 放常用的常數, 目前有MyColors
-|- beans => json 用的 getter setter class
-|- http => api用的, BaseHttp主要設定dio的通用參數
-|- base => 放BaseBloc
-|- ui => 放widget(包含bloc)
+direct tree  
+|- main.dart  
+|- enums => 放enum  
+|- configs => 放常用的常數, 目前有MyColors  
+|- beans => json 用的 getter setter class  
+|- http => api用的, BaseHttp主要設定dio的通用參數  
+|- base => 放BaseBloc  
+|- ui => 放widget(包含bloc)  
 
 ## 簡介
 #### main.dart
@@ -38,7 +38,7 @@ direct tree
 
 #### base/BaseBloc.dart
 1. BaseBloc 繼承 Bloc
-2. 通用function
+2. 通用function  
    (1) init(context): 這裡初始化那些需要用到context的東西 ex. showMsg  
    (2) showMsg(msg): 通用的訊息談窗  
    (3) onApiError(error): api error時可以call這個function  
@@ -55,17 +55,17 @@ direct tree
 2. callApi的時後會有loading, 沒有api在跑的時後loading會消失
 3. api error時會有訊息談窗
 4. 返回鍵點按時會出現toast, 1.5秒內再次返回時後會退出應用
-5. ui用到2個套件 
+5. ui用到2個套件  
    (1) StickyHeader: 保持header在畫面上方  
    (2) ScrollablePositionedList: 方便跳轉到指定的item index  
-6. header上面有3個按鈕
+6. header上面有3個按鈕  
    (1) 開關: 可以將list收起與展開, 然後scroll到該header的position  
    (2) 橋樑: 選取後畫面只會出現橋樑的card, 然後scroll到該header的position  
    (3) 隧道: 選取後畫面只會出現隧道的card, 然後scroll到該header的position  
-7. 右下floating button
+7. 右下floating button  
    (1) 上: scroll到上一個areaCode的position  
    (2) 下: scroll到下一個areaCode的position  
-8. list item
+8. list item  
    (1) 橋樑card  
    (2) 隧道card  
 9. RefreshIndicator 下拉刷新
