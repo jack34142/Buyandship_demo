@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -9,11 +8,11 @@ abstract class BaseHttp {
   String get baseUrl;
 
   BaseHttp(){
-    dio.options.baseUrl = baseUrl;
-    dio.options.connectTimeout = Duration(seconds: 60);
+    dio.options.baseUrl = baseUrl;  //設定baseUrl
+    dio.options.connectTimeout = Duration(seconds: 60);  //設定timeout的秒數
 
     dio.interceptors.add(
-      InterceptorsWrapper(
+      InterceptorsWrapper(  //攔截api request response的header data body ... 等資訊
         onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
           debugPrint("|- (${options.method}) ${options.uri.toString()}");
           options.headers.forEach((key, value) {

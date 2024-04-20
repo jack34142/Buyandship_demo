@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_bloc: ^8.1.5
   dio: ^5.4.3+1
+  sticky_headers: ^0.3.0+2
+  scrollable_positioned_list: ^0.3.8
 
 dev_dependencies:
   flutter_test:

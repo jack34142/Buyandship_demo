@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:buyandship_demo/beans/BridgeBean.dart';
 import 'package:buyandship_demo/beans/TunnelBean.dart';
 import 'package:buyandship_demo/http/BaseHttp.dart';
-import 'package:dio/dio.dart';
 
 class GovApi extends BaseHttp {
   static final GovApi _singleton = GovApi._internal();
@@ -23,15 +22,19 @@ class GovApi extends BaseHttp {
       Function(dynamic) onFailed
   ) async {
     Completer<bool> completer = Completer();
-    Response response = await dio.get('/blobfs/Bridges.json');
-    if(response.statusCode == 200 && response.data is List){
-      List<BridgeBean> bridges = (response.data as List).map((e) => BridgeBean.fromJson(e)).toList();
-      onSuccess(bridges);
-      completer.complete(true);
-    }else{
-      onFailed(response.data.toString());
+    dio.get('/blobfs/Bridges.json').then((response){
+      if(response.statusCode == 200 && response.data is List){
+        List<BridgeBean> bridges = (response.data as List).map((e) => BridgeBean.fromJson(e)).toList();
+        onSuccess(bridges);
+        completer.complete(true);
+      }else{
+        onFailed(response.data.toString());
+        completer.complete(false);
+      }
+    }).catchError((e){
+      onFailed(e.toString());
       completer.complete(false);
-    }
+    });
     return completer.future;
   }
 
@@ -42,15 +45,19 @@ class GovApi extends BaseHttp {
       Function(dynamic) onFailed
   ) async {
     Completer<bool> completer = Completer();
-    Response response = await dio.get('/blobfs/Tunnels.json');
-    if(response.statusCode == 200 && response.data is List){
-      List<TunnelBean> tunnels = (response.data as List).map((e) => TunnelBean.fromJson(e)).toList();
-      onSuccess(tunnels);
-      completer.complete(true);
-    }else{
-      onFailed(response.data.toString());
+    dio.get('/blobfs/Tunnels.json').then((response){
+      if(response.statusCode == 200 && response.data is List){
+        List<TunnelBean> tunnels = (response.data as List).map((e) => TunnelBean.fromJson(e)).toList();
+        onSuccess(tunnels);
+        completer.complete(true);
+      }else{
+        onFailed(response.data.toString());
+        completer.complete(false);
+      }
+    }).catchError((e){
+      onFailed(e.toString());
       completer.complete(false);
-    }
+    });
     return completer.future;
   }
 }

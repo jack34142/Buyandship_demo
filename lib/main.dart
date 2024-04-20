@@ -1,14 +1,23 @@
+import 'package:buyandship_demo/configs/MyColors.dart';
 import 'package:buyandship_demo/ui/views/HomePage.dart';
 import 'package:buyandship_demo/ui/views/OverlayPage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
+  if (!kDebugMode) {  //release mode 自動禁用 debugPrint
+    debugPrint = (String? message, {int? wrapWidth}) => null;
+  }
+
   // Bloc.observer = const AppBlocObserver();
   runApp(MaterialApp(
     home: HomePage(),
+    theme: ThemeData(
+      scaffoldBackgroundColor: MyColors.bg_default
+    ),
     builder: (context, child){
-      return OverlayPage(child!);
+      return OverlayPage(child!);  //OverlayPage做全域使用的view, 目前有loading跟toast
     },
   ));
 }

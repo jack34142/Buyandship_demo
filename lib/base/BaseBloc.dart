@@ -1,49 +1,42 @@
 import 'package:buyandship_demo/ui/events/OverlayEvent.dart';
+import 'package:buyandship_demo/ui/temeplates/dialogs/MsgDialog.dart';
 import 'package:buyandship_demo/ui/views/OverlayPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BaseBloc<T, V> extends Bloc<T, V> {
+
+  Function(String)? showMsg;
+
   BaseBloc(super.initialState);
 
-  int loadingCount = 0;
-  int emitTimer = 0;
-  int waitEvent = 0;
+  init(BuildContext context){
+    showMsg = (msg){
+      showDialog(
+        context: context,
+        builder: (context){
+          return MsgDialog(msg);
+        }
+      );
+    };
+  }
 
   onApiError(dynamic error){
-    debugPrint(error);
+    debugPrint(error.toString());
+    if(showMsg != null){
+      showMsg!(error.toString());
+    }
   }
 
   showLoading(){
-    loadingCount++;
     OverlayPage.bloc.add(ShowLoading());
   }
 
   hideLoading(){
-    if(loadingCount > 0){
-      loadingCount--;
-    }
-    if(loadingCount == 0){
-      OverlayPage.bloc.add(HideLoading());
-      return true;
-    }else{
-      return false;
-    }
+    OverlayPage.bloc.add(HideLoading());
   }
 
-  @override
-  void add(T event) {
-    super.add(event);
-    waitEvent++;
-  }
-
-  @override
-  void emit(V state) {
-    if(waitEvent > 0){
-      waitEvent--;
-    }
-    if(waitEvent == 0){
-      super.emit(state);
-    }
+  showToast(String msg){
+    OverlayPage.bloc.add(ShowToast(msg));
   }
 }
