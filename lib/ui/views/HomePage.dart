@@ -31,7 +31,11 @@ class HomePage extends StatelessWidget {
         bloc.add(GetTunnels());
         return bloc;
       },
-      child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state){
+      child: BlocConsumer<HomeBloc, HomeState>(
+        listener: (context, state){
+
+        },
+        builder: (context, state){
         return Scaffold(
           body: PopScope(
             canPop: false,
@@ -72,10 +76,10 @@ class HomePage extends StatelessWidget {
                                         isSelect: state.selectedType == StructType.BRIDGE,
                                         onPressed: (){
                                           if(!_scrolling){
-                                            bloc.add(OnBridgeTap());
                                             if( !isOpen ){
                                               bloc.add(OnTableSwitchTap(areaCode));
                                             }
+                                            bloc.add(OnBridgeTap());
                                             _scrollTo(index);
                                           }
                                         }
@@ -85,10 +89,10 @@ class HomePage extends StatelessWidget {
                                         isSelect: state.selectedType == StructType.TUNNEL,
                                         onPressed: (){
                                           if(!_scrolling){
-                                            bloc.add(OnTunnelTap());
                                             if( !isOpen ){
                                               bloc.add(OnTableSwitchTap(areaCode));
                                             }
+                                            bloc.add(OnTunnelTap());
                                             _scrollTo(index);
                                           }
                                         }
@@ -306,7 +310,9 @@ class HomePage extends StatelessWidget {
   // ------------------------------
   void _scrollTo(int index) async {
     _scrolling = true;
-    await _areaCodeScrollController.scrollTo(index: index, duration: Duration(milliseconds: 500));
+    await Future.delayed(Duration(milliseconds: 100));  //等ui渲染完畢
+    await _areaCodeScrollController.scrollTo(index: index, duration: Duration(milliseconds: 400));
+    // _areaCodeScrollController.jumpTo(index: index);
     _scrolling = false;
   }
 
