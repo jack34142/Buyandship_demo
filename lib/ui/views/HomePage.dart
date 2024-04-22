@@ -31,11 +31,7 @@ class HomePage extends StatelessWidget {
         bloc.add(GetTunnels());
         return bloc;
       },
-      child: BlocConsumer<HomeBloc, HomeState>(
-        listener: (context, state){
-
-        },
-        builder: (context, state){
+      child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state){
         return Scaffold(
           body: PopScope(
             canPop: false,
@@ -281,7 +277,9 @@ class HomePage extends StatelessWidget {
             onPressed: () async {
               if( !_scrolling ){
                 int min = _areaCodePositionListener.itemPositions.value.reduce((a, b) => a.index > b.index ? b : a).index;
-                if(min > 0){
+                if(min == 0){
+                  bloc.showToast("已經到頂了");
+                }else{
                   min--;
                 }
                 _scrollTo(min);
@@ -296,7 +294,9 @@ class HomePage extends StatelessWidget {
             onPressed: () async {
               if( !_scrolling ){
                 int max = _areaCodePositionListener.itemPositions.value.reduce((a, b) => a.index < b.index ? b : a).index;
-                if(max < maxIndex){
+                if(max == maxIndex){
+                  bloc.showToast("已經到底了");
+                }else{
                   max++;
                 }
                 _scrollTo(max);
@@ -309,11 +309,12 @@ class HomePage extends StatelessWidget {
 
   // ------------------------------
   void _scrollTo(int index) async {
-    _scrolling = true;
-    await Future.delayed(Duration(milliseconds: 100));  //等ui渲染完畢
-    await _areaCodeScrollController.scrollTo(index: index, duration: Duration(milliseconds: 400));
-    // _areaCodeScrollController.jumpTo(index: index);
-    _scrolling = false;
+    if( !_scrolling ){
+      _scrolling = true;
+      await Future.delayed(Duration(milliseconds: 10));  //等ui渲染完畢
+      await _areaCodeScrollController.scrollTo(index: index, duration: Duration(milliseconds: 500));
+      _scrolling = false;
+    }
   }
 
   void _onBackPress(){

@@ -1,16 +1,18 @@
+import 'package:buyandship_demo/ui/blocs/OverlayBloc.dart';
 import 'package:buyandship_demo/ui/events/OverlayEvent.dart';
 import 'package:buyandship_demo/ui/temeplates/dialogs/MsgDialog.dart';
-import 'package:buyandship_demo/ui/views/OverlayPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BaseBloc<T, V> extends Bloc<T, V> {
+  OverlayBloc? _overlayBloc;
 
   Function(String)? showMsg;
 
   BaseBloc(super.initialState);
 
   init(BuildContext context){
+    _overlayBloc = context.read<OverlayBloc>();
     showMsg = (msg){
       showDialog(
         context: context,
@@ -29,14 +31,14 @@ class BaseBloc<T, V> extends Bloc<T, V> {
   }
 
   showLoading(){
-    OverlayPage.bloc.add(ShowLoading());
+    _overlayBloc?.add(ShowLoading());
   }
 
   hideLoading(){
-    OverlayPage.bloc.add(HideLoading());
+    _overlayBloc?.add(HideLoading());
   }
 
   showToast(String msg){
-    OverlayPage.bloc.add(ShowToast(msg));
+    _overlayBloc?.add(ShowToast(msg));
   }
 }

@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OverlayPage extends StatelessWidget{
-
-  static final OverlayBloc bloc = OverlayBloc();
-
   final Widget child;
 
   const OverlayPage(this.child, {super.key});
@@ -13,7 +10,7 @@ class OverlayPage extends StatelessWidget{
   @override
   Widget build(context) {
     return BlocProvider(
-      create: (_) => bloc,
+      create: (_) => OverlayBloc(),
       child: BlocBuilder<OverlayBloc, MyOverlayState>(
         builder: (context, state){
           return Stack(

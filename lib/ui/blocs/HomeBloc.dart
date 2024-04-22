@@ -10,7 +10,6 @@ class HomeState {
   Map<int, List<BridgeBean>> bridges = {};
   Map<int, List<TunnelBean>> tunnels = {};
   StructType selectedType = StructType.NONE;
-  int moveIndex = 0;
 
   HomeState({HomeState? state}){
     if(state != null){
