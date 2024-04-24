@@ -1,3 +1,6 @@
+## buyandship demo
+demo影片: https://www.youtube.com/watch?v=y8_pw28Qlxc
+
 #### File Tree  
 |- main.dart  
 |- enums => 放enum  
