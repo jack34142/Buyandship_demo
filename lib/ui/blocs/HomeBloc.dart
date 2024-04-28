@@ -1,14 +1,19 @@
-import 'package:buyandship_demo/base/BaseBloc.dart';
-import 'package:buyandship_demo/beans/BridgeBean.dart';
-import 'package:buyandship_demo/beans/TunnelBean.dart';
-import 'package:buyandship_demo/enums/StructType.dart';
+import 'package:buyandship_demo/ui/BaseBloc.dart';
 import 'package:buyandship_demo/http/GovApi.dart';
 import 'package:buyandship_demo/ui/events/HomeEvent.dart';
+import 'package:buyandship_demo/ui/models/Bridge.dart';
+import 'package:buyandship_demo/ui/models/Tunnel.dart';
+
+enum StructType{
+  BRIDGE,
+  TUNNEL,
+  NONE
+}
 
 class HomeState {
   Map<int, bool> areaCodes = {};
-  Map<int, List<BridgeBean>> bridges = {};
-  Map<int, List<TunnelBean>> tunnels = {};
+  Map<int, List<Bridge>> bridges = {};
+  Map<int, List<Tunnel>> tunnels = {};
   StructType selectedType = StructType.NONE;
 
   HomeState({HomeState? state}){

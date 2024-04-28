@@ -1,10 +1,9 @@
 import 'dart:io';
-import 'package:buyandship_demo/beans/BridgeBean.dart';
-import 'package:buyandship_demo/beans/TunnelBean.dart';
 import 'package:buyandship_demo/configs/MyColors.dart';
-import 'package:buyandship_demo/enums/StructType.dart';
 import 'package:buyandship_demo/ui/blocs/HomeBloc.dart';
 import 'package:buyandship_demo/ui/events/HomeEvent.dart';
+import 'package:buyandship_demo/ui/models/Bridge.dart';
+import 'package:buyandship_demo/ui/models/Tunnel.dart';
 import 'package:buyandship_demo/ui/temeplates/buttons/CheckButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -53,8 +52,8 @@ class HomePage extends StatelessWidget {
                         itemBuilder: (context, index){
                           int areaCode = state.areaCodes.keys.elementAt(index);
                           bool isOpen = state.areaCodes[areaCode]!;
-                          List<BridgeBean>? bridges = state.bridges[areaCode];
-                          List<TunnelBean>? tunnels = state.tunnels[areaCode];
+                          List<Bridge>? bridges = state.bridges[areaCode];
+                          List<Tunnel>? tunnels = state.tunnels[areaCode];
                           int bridgeCount = bridges != null ? bridges.length : 0;
                           int tunnelCount = tunnels != null ? tunnels.length : 0;
                           return StickyHeader(
@@ -142,13 +141,13 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildBridge(List<BridgeBean> bridges){
+  Widget _buildBridge(List<Bridge> bridges){
     return ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: bridges.length,
         itemBuilder: (conteext, index){
-          BridgeBean bridge = bridges[index];
+          Bridge bridge = bridges[index];
           return Container(
             margin: EdgeInsets.only(left: 14, right: 14, bottom: 15),
             child: Material(
@@ -179,13 +178,13 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildTunnel(List<TunnelBean> tunnels){
+  Widget _buildTunnel(List<Tunnel> tunnels){
     return ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: tunnels.length,
         itemBuilder: (conteext, index){
-          TunnelBean tunnel = tunnels[index];
+          Tunnel tunnel = tunnels[index];
           return Container(
             margin: EdgeInsets.only(left: 14, right: 14, bottom: 15),
             child: Material(

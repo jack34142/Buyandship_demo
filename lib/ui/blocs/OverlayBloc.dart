@@ -1,4 +1,4 @@
-import 'package:buyandship_demo/base/BaseBloc.dart';
+import 'package:buyandship_demo/ui/BaseBloc.dart';
 import 'package:buyandship_demo/ui/events/OverlayEvent.dart';
 
 class MyOverlayState {

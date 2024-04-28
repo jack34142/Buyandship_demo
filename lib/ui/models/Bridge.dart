@@ -2,12 +2,12 @@
 
 import 'dart:convert';
 
-BridgeBean bridgeBeanFromJson(String str) => BridgeBean.fromJson(json.decode(str));
+Bridge BridgeFromJson(String str) => Bridge.fromJson(json.decode(str));
 
-String bridgeBeanToJson(BridgeBean data) => json.encode(data.toJson());
+String BridgeToJson(Bridge data) => json.encode(data.toJson());
 
-class BridgeBean {
-    BridgeBean({
+class Bridge {
+    Bridge({
         required this.countyCode,
         required this.locational,
         required this.objLatitude,
@@ -71,7 +71,7 @@ class BridgeBean {
     int inspectRate;  //定期檢測週期(月/次)
     int driveways;  //總車道數
 
-    factory BridgeBean.fromJson(Map<dynamic, dynamic> json) => BridgeBean(
+    factory Bridge.fromJson(Map<dynamic, dynamic> json) => Bridge(
         countyCode: json["CountyCode"],
         locational: json["locational"],
         objLatitude: json["Obj_Latitude"]?.toDouble(),

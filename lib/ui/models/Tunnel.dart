@@ -2,12 +2,12 @@
 
 import 'dart:convert';
 
-TunnelBean tunnelBeanFromJson(String str) => TunnelBean.fromJson(json.decode(str));
+Tunnel TunnelFromJson(String str) => Tunnel.fromJson(json.decode(str));
 
-String tunnelBeanToJson(TunnelBean data) => json.encode(data.toJson());
+String TunnelToJson(Tunnel data) => json.encode(data.toJson());
 
-class TunnelBean {
-    TunnelBean({
+class Tunnel {
+    Tunnel({
         required this.countyCode,
         required this.tunnelKind,
         required this.buildEngineers,
@@ -39,7 +39,7 @@ class TunnelBean {
     String route;  //道路名稱
     List<Line> lines;  //多向線
 
-    factory TunnelBean.fromJson(Map<dynamic, dynamic> json) => TunnelBean(
+    factory Tunnel.fromJson(Map<dynamic, dynamic> json) => Tunnel(
         countyCode: json["CountyCode"],
         tunnelKind: json["TunnelKind"],
         buildEngineers: json["BuildEngineers"],
