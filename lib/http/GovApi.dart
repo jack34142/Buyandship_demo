@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:buyandship_demo/http/BaseHttp.dart';
-import 'package:buyandship_demo/ui/models/Bridge.dart';
-import 'package:buyandship_demo/ui/models/Tunnel.dart';
+import 'package:buyandship_demo/models/Bridge.dart';
+import 'package:buyandship_demo/models/Tunnel.dart';
 
 class GovApi extends BaseHttp {
   static final GovApi _singleton = GovApi._internal();

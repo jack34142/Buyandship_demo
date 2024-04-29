@@ -1,8 +1,8 @@
 import 'package:buyandship_demo/ui/BaseBloc.dart';
 import 'package:buyandship_demo/http/GovApi.dart';
 import 'package:buyandship_demo/ui/events/HomeEvent.dart';
-import 'package:buyandship_demo/ui/models/Bridge.dart';
-import 'package:buyandship_demo/ui/models/Tunnel.dart';
+import 'package:buyandship_demo/models/Bridge.dart';
+import 'package:buyandship_demo/models/Tunnel.dart';
 
 enum StructType{
   BRIDGE,
